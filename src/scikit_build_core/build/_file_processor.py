@@ -86,6 +86,7 @@ def each_unignored_file(
     builtin_exclude_spec = pathspec.GitIgnoreSpec.from_lines(exclude_lines)
 
     include_spec = pathspec.GitIgnoreSpec.from_lines(include)
+    print("include_spec:", repr(include_spec))
 
     # Map each visited directory to the set of (device, inode) keys of itself
     # and all of its ancestors along the walk path. A circular symlink
@@ -145,6 +146,8 @@ def each_unignored_file(
                 is_path=False,
             ):
                 yield path
+            else:
+                print("not matched:", path)
 
 
 def _include_may_match_below(pattern: str, dirpath: str) -> bool:
